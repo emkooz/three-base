@@ -8,8 +8,7 @@ This is a template to start any TypeScript-based three.js project.
    - Yarn can be installed with ``npm install -g yarn``
 2. Clone this repository.
 3. Run ``yarn`` in the base folder, which will setup the project and install all required dependencies.
-
-Note: this project includes the VSCode yarn SDK in the ``.yarn/sdks`` folder.
+4. If using VSCode, run ``yarn dlx @yarnpkg/sdks vscode`` to setup yarn for TypeScript + VSCode.
 
 ## Usage
 
