@@ -40,7 +40,7 @@ Folder structure:
       - Global CSS for any HTML elements, which is included in *app.ts*.
   - **assets**
     - Any asset that you want to load (texture, JSON, etc) goes here. These can be loaded directly from source *without* the referring to the "assets" folder. Example: to load "example.txt" under "assets/example.txt" you would access "example.txt" without the "assets/".
-  - *index.html*
-      - The base HTML file that vite will build and run from.
 - **dist**
     - The distribution files are compiled to this folder when you use ``yarn build``. 
+- *index.html*
+  - The base HTML file that vite will build and run from.
