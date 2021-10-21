@@ -1,23 +1,18 @@
-import { GUI } from 'dat-gui'
+import { Pane } from 'tweakpane';
 import { mainCamera } from './camera';
 
-/* Small class that uses dat-gui for UI */
+/* Small class that uses tweakpane for UI */
 
 export class UI {
-    gui = new GUI();
-    folder: GUI;
+    pane = new Pane();
 
     private static instance: UI;
     private constructor() {
         const cam = mainCamera.getInstance();
 
-        this.folder = this.gui.addFolder('Camera');
-
-        this.folder.add(cam.camera.position, 'x').name('Camera X').listen();
-        this.folder.add(cam.camera.position, 'y').name('Camera Y').listen();
-        this.folder.add(cam.camera.position, 'z').name('Camera Z').listen();
-
-        this.folder.open();
+        this.pane.addMonitor(cam.camera.position, 'x', { interval: 20 });
+        this.pane.addMonitor(cam.camera.position, 'y', { interval: 20 });
+        this.pane.addMonitor(cam.camera.position, 'z', { interval: 20 });
     }
 
     static getInstance() {
