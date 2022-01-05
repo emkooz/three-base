@@ -1,5 +1,4 @@
 import * as three from 'three'
-import Stats from 'three/examples/jsm/libs/stats.module'
 
 import { mainCamera } from './camera'
 import { UI } from './ui';
@@ -15,9 +14,6 @@ export class Scene {
     camera: mainCamera;
     ui: UI;
 
-    /* default three.js stats module (in top left) */
-    stats: Stats;
-
     cubes: UnlitCubes;
 
     private static instance: Scene;
@@ -26,9 +22,6 @@ export class Scene {
         this.canvas = document.querySelector("#mainCanvas")!;
         this.renderer = new three.WebGLRenderer({canvas: this.canvas, antialias: true});
         this.scene = new three.Scene();
-        
-        this.stats = Stats();
-        document.getElementById('stats')?.appendChild(this.stats.dom);
 
         this.renderer.setAnimationLoop(() => {this.render()})
 
@@ -41,14 +34,14 @@ export class Scene {
     }
 
     render = () => {
-        this.stats.begin();
-        
+        this.ui.fpsGraph.begin();
+
         // update camera if scene resized
         this.camera.ResizeCam(this.canvas, this.renderer);
         
         this.renderer.render(this.scene, this.camera.mainCam);
 
-        this.stats.end();
+        this.ui.fpsGraph.end();
     }
 
     static getInstance() {
