@@ -1,6 +1,7 @@
 {
   "name": "three-base",
   "main": "dist/index.js",
+  "license": "MIT",
   "scripts": {
     "build": "vite build",
     "build-dev": "vite preview",
