@@ -4,20 +4,19 @@ This is a template to start any TypeScript-based three.js project.
 
 ## Installation
 
-1. Make sure [node.js](https://nodejs.org/en/download/) and [yarn](https://yarnpkg.com/getting-started/install) are installed. 
-   - Yarn can be installed with ``npm install -g yarn``
+1. Make sure [node.js](https://nodejs.org/en/download/) and [pNPM](https://pnpm.io/installation) are installed. 
+   - pNPM can be installed with ``npm install -g pnpm``
 2. Clone this repository.
-3. Run ``yarn`` in the base folder, which will setup the project and install all required dependencies.
-4. If using VSCode, run ``yarn dlx @yarnpkg/sdks vscode`` to setup yarn for TypeScript + VSCode.
+3. Run ``pnpm i`` in the base folder, which will setup the project and install all required dependencies.
 
 If deploying remotely (such as to Github Pages), make sure to change ``base`` in *vite.config.js* to the base URL that the page will be hosted on. Example: if hosting on example.com/coolwebpage, change ``base`` to ``/coolwebpage/``
 
 ## Usage
 
-- ``yarn start`` will start a local vite server which will reload on any changes. 
-- ``yarn build`` will compile the required files for distribution into the ``dist`` folder.
-- ``yarn build-dev`` will build and start a vite server with the production build to confirm it built correctly.
-- ``yarn deploy`` will deploy everything in the *dist* folder to the "dist" branch of the current repository (current changes are built before deploying).
+- ``pnpm start`` will start a local vite server which will reload on any changes. 
+- ``pnpm build`` will compile the required files for distribution into the ``dist`` folder.
+- ``pnpm build-dev`` will build and start a vite server with the production build to confirm it built correctly.
+- ``pnpm deploy-pages`` will deploy everything in the *dist* folder to the "dist" branch of the current repository (current changes are built before deploying).
 
 ## Layout
 
