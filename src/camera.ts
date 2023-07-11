@@ -1,55 +1,57 @@
-import * as three from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import * as three from "three";
+import { ArcballControls } from "three/examples/jsm/controls/ArcballControls";
 
 export class mainCamera {
-    camera: three.PerspectiveCamera;
-    controls: OrbitControls;
+	camera: three.PerspectiveCamera;
+	controls: ArcballControls;
 
-    private static instance: mainCamera;
+	settings = {
+		fov: 75,
+		gizmosEnabled: true,
+	};
 
-    private constructor() {
-        /* These defaults are a good average for most use cases */
-        this.camera = new three.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
-        this.camera.position.z = 25;
+	private static instance: mainCamera;
 
-        this.controls = new OrbitControls(this.camera, document.getElementById('content')!);
-        this.controls.target.set(0, 0, 0);
-        this.controls.update();
-    }
+	private constructor(scene?: three.Scene) {
+		/* These defaults are a good average for most use cases */
+		this.camera = new three.PerspectiveCamera(this.settings.fov, window.innerWidth / window.innerHeight, 0.1, 10000);
+		this.camera.position.z = 25;
 
-    get mainCam() {
-        return this.camera;
-    }
+		this.controls = new ArcballControls(this.camera, document.getElementById("content")!, scene);
+		this.controls.enableGizmos = this.settings.gizmosEnabled;
+	}
 
-    resetCamera = () => {
-        this.controls.reset();
-    }
+	get mainCam() {
+		return this.camera;
+	}
 
-    // called if the window is resized
-    ResizeCam = (canvas: HTMLCanvasElement, renderer: three.WebGLRenderer) => {
-        if (this.checkResize(canvas, renderer)) {
-            const resizedCanvas = renderer.domElement;
-            this.camera.aspect = resizedCanvas.clientWidth / resizedCanvas.clientHeight;
-            this.camera.updateProjectionMatrix();
-        }
-    }
+	resetCamera() {
+		this.controls.reset();
+	}
 
-    private checkResize = (canvas: HTMLCanvasElement, renderer: three.WebGLRenderer) => {
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        const needResize = canvas.width !== width || canvas.height !== height;
-    
-        if (needResize)
-            renderer.setSize(width, height, false);
-    
-        return needResize;
-    }
+	// called if the window is resized
+	resizeCam(canvas: HTMLCanvasElement, renderer: three.WebGLRenderer) {
+		if (this.checkResize(canvas, renderer)) {
+			const resizedCanvas = renderer.domElement;
+			this.camera.aspect = resizedCanvas.clientWidth / resizedCanvas.clientHeight;
+			this.camera.updateProjectionMatrix();
+		}
+	}
 
-    static getInstance() {
-        if (mainCamera.instance)
-            return this.instance;
+	private checkResize(canvas: HTMLCanvasElement, renderer: three.WebGLRenderer) {
+		const width = canvas.clientWidth;
+		const height = canvas.clientHeight;
+		const needResize = canvas.width !== width || canvas.height !== height;
 
-        this.instance = new mainCamera();
-        return this.instance;
-    }
+		if (needResize) renderer.setSize(width, height, false);
+
+		return needResize;
+	}
+
+	static getInstance(scene?: three.Scene) {
+		if (mainCamera.instance) return this.instance;
+
+		this.instance = new mainCamera(scene);
+		return this.instance;
+	}
 }
